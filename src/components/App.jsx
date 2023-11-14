@@ -25,9 +25,11 @@ const App = () => {
   setTrigger(false);
 }
 const editTaskOriginal = () => {
+  if(taskInput){
   taskList.splice(index,1,taskInput);
   setTaskInput("");
   setTrigger(true);
+  }
 }
   return (
     <Box>

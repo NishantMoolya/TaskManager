@@ -64,7 +64,7 @@ const App = () => {
               <Typography>In Progress</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <TaskList taskList={taskList} deleteTask={deleteTask} editTask={editTask} />
+              <TaskList taskList={taskList} deleteTask={deleteTask} editTask={editTask} date={newDate-prstDate} />
             </AccordionDetails>
           </Accordion>
         </Grid>

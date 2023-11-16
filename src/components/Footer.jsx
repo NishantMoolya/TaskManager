@@ -3,7 +3,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <AppBar position='sticky'sx={{ bottom:0,left:0}}>
+    <AppBar position='static' color='error'>
         <Toolbar>
             <Grid container>
                 <Grid item>

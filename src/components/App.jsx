@@ -1,74 +1,99 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Container, Grid, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import { Box, Grid } from '@mui/material'
+import React, { useReducer, useState } from 'react'
 import Input from './Input'
-import TaskList from './TaskList'
 import Navbar from './Navbar'
-import { ExpandMore } from '@mui/icons-material'
 import Footer from './Footer'
-import Counter from './Counter'
+import TaskFramer from './TaskFramer'
+import MyAccordion from './MyAccordion'
 
 const App = () => {
-  const [taskInput, setTaskInput] = useState("");
-  const [taskList, setTaskList] = useState([]);
+  
+  //state declarations
   const [trigger, setTrigger] = useState(true);
   const [index, setIndex] = useState(null);
-  const [newDate,setNewDate] = useState(null);
-  let prstDate = new Date().getDate();
-  const [diff,setDiff] = useState(null);
-  const addTask = () => {
-    if (taskInput) {
-      setTaskList([...taskList, taskInput]);
-      setTaskInput("");
-      console.log(taskList);
+  const [active, setActive] = useState(0);
+  let initialTask = {
+    task:"",
+    status:"",
+    date:"",
+    id:Date.now()
+  };
+  const [taskInput, setTaskInput] = useState(initialTask);
+  const [taskList, setTaskList] = useState([]);
+  //handle input 
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setTaskInput({ ...taskInput, [name]: value })
+
+  }
+  //adding task 
+  const addTask = (mode) => {
+    if (taskInput.task) {
+      if(mode){
+        setActive((preVal) => preVal + 1);
+        setTaskList([...taskList, taskInput]);
+      }
+      else{
+        taskList.splice(index, 1, taskInput);
+        setTrigger(true);
+      }
+      setTaskInput({...initialTask,id:Date.now()});
     }
   }
-  const deleteTask = (ind) => {
-    const deleted = taskList.filter((task) => task !== taskList[ind]);
+  //deleting task
+  const deleteTask = (trig) => {
+    const deleted = taskList.filter((task) => task.id !== trig);
     setTaskList(deleted);
+    setTaskInput({...initialTask,id:Date.now()});
+    setTrigger(true);
   }
-  const editTask = (ind) => {
-    setTaskInput(taskList[ind]);
-    setIndex(ind);
+  //editing task
+  const editTask = (trig) => {
+    const edited = taskList.filter((task) => task.id === trig)
+    const ind = taskList.findIndex((task,ind) => task.id === trig);
+    console.log(taskList.findIndex((task,ind) => task.id === trig));
     setTrigger(false);
+    setActive(0);
+    setTaskInput(edited[0]);
+    setIndex(ind);
   }
-  const editTaskOriginal = () => {
-    if (taskInput) {
-      taskList.splice(index, 1, taskInput);
-      setTaskInput("");
-      setTrigger(true);
+  //form forward movement
+  const handleStep = () => {
+    setActive((preVal) => preVal + 1);
+  }
+  //reset form to start
+  const handleReset = () => {
+    setActive(0);
+  }
+  //task manager
+  const taskManager = (triallist,action) => {
+    switch(action.type){
+      case 'add':  return addTask(action.payload);
+      case 'edit' : return editTask(action.payload);
+      case 'delete' : return deleteTask(action.payload);
+      case 'forward' : return handleStep();
+      case 'reset' : return handleReset();
+      case 'change' : return handleInput(action.payload);
+      default: return ;
     }
   }
-  const handleDate = (e) => {
-     setNewDate(new Date(e.target.value).getDate());
-  }
+  const [triallist, dispatch] = useReducer(taskManager, []);
+  //return jsx
   return (
     <Box minHeight={'100vh'}>
       <Navbar />
-      <Grid container>
+      <Grid container height={'100vmin'}>
         <Grid item flex={1} bgcolor={'success.light'} justifyContent={'center'} p={2}>
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMore />}>
-              <Typography>Completed</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <TaskList taskList={taskList} deleteTask={deleteTask} editTask={editTask} date={newDate-prstDate} />
-            </AccordionDetails>
-          </Accordion>
         </Grid>
-        <Grid item flex={1} justifyContent={'center'} bgcolor={'warn.light'} p={2}>
-          <Input taskInput={taskInput} setTaskInput={setTaskInput} addTask={addTask} editTaskOriginal={editTaskOriginal} trigger={trigger} handleDate={handleDate} />
+        <Grid item flex={1.5} justifyContent={'center'} bgcolor={'warn.light'} p={2}>
+          <Input taskInput={taskInput} trigger={trigger} active={active} dispatch={dispatch} />
         </Grid>
-        <Grid item flex={1} bgcolor={'info.light'} justifyContent={'center'} p={2}>
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMore />}>
-              <Typography>In Progress</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <TaskList taskList={taskList} deleteTask={deleteTask} editTask={editTask} date={newDate-prstDate} />
-            </AccordionDetails>
-          </Accordion>
+        <Grid item flex={1.5} bgcolor={'info.light'} justifyContent={'center'} p={2}>
+          <MyAccordion element={<><MyAccordion element={<TaskFramer taskList={taskList} status={'reminder'} dispatch={dispatch} />} title={'Reminder'}/>
+          <MyAccordion element={<TaskFramer taskList={taskList} status={'todo'} dispatch={dispatch} />} title={'Todo'} /></>} title={'Collections'} />
         </Grid>
       </Grid>
+      <Footer />
     </Box>
   )
 }

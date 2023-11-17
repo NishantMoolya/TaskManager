@@ -1,5 +1,5 @@
-import { Home } from '@mui/icons-material'
-import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+import { AccountCircle, DarkMode, FormatListBulleted, Home } from '@mui/icons-material'
+import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Switch } from '@mui/material'
 import React from 'react'
 
 const Menubar = () => {
@@ -10,24 +10,32 @@ const drawer = (
                 <ListItemIcon>
                     <Home />
                 </ListItemIcon>
-            </ListItemButton>
             <ListItemText>Home</ListItemText>
+            </ListItemButton>
         </ListItem>
         <ListItem>
             <ListItemButton>
                 <ListItemIcon>
-                    <Home />
+                    <AccountCircle />
                 </ListItemIcon>
+            <ListItemText>Profile</ListItemText>
             </ListItemButton>
-            <ListItemText>Home</ListItemText>
         </ListItem>
         <ListItem>
             <ListItemButton>
                 <ListItemIcon>
-                    <Home />
+                    <FormatListBulleted />
                 </ListItemIcon>
+            <ListItemText>Tasks</ListItemText>
             </ListItemButton>
-            <ListItemText>Home</ListItemText>
+        </ListItem>
+        <ListItem>
+            <ListItemButton>
+                <ListItemIcon>
+                    <DarkMode />
+                </ListItemIcon>
+            <Switch />
+            </ListItemButton>
         </ListItem>
     </List>
 )

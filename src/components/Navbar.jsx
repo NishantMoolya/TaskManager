@@ -1,3 +1,4 @@
+import { Logout } from '@mui/icons-material'
 import { AppBar, Avatar, Box, Chip, Grid, Stack, Toolbar, Typography } from '@mui/material'
 import React from 'react'
 
@@ -28,7 +29,7 @@ const Navbar = () => {
                             <Grid item>
                                 <Chip
                                     avatar={<Avatar alt="Natacha" src="/static/images/avatar/1.jpg" />}
-                                    label="Login"
+                                    label="Logout"
                                     variant="outlined"
                                 />
                             </Grid>

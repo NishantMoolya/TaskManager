@@ -1,12 +1,13 @@
-import { Box, Button, Container, Typography } from '@mui/material'
+import { AddTask } from '@mui/icons-material'
+import { Box, Button, Container, IconButton, Typography } from '@mui/material'
 import React from 'react'
 
-const Sectionbar = () => {
+const Sectionbar = ({handleCreateTask}) => {
   return (
     <Box display={'flex'} justifyContent={'center'}>
         <Container sx={{display:"flex", justifyContent:"center",flexDirection:"column",alignItems:"center",gap:2,m:1}}>
-            <Typography variant='h3' color="primary.main">Taskzz : The Task Manager</Typography>
-            <Button variant='contained'>Create Task</Button>
+            <Typography display={{xs:"none", sm:"none",md:"block"}} variant='h3' color="primary.main">Taskzz : The Task Manager</Typography>
+            <Button variant='contained' startIcon={<AddTask />} onClick={handleCreateTask}>Create Task</Button>
         </Container>
     </Box>
   )

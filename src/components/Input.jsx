@@ -1,12 +1,13 @@
 import { FormControl } from '@mui/base';
 import { Add, Edit } from '@mui/icons-material'
 import { Box, Button, Fab, FormControlLabel, FormLabel, IconButton, Radio, RadioGroup, Stack, Step, StepContent, StepLabel, Stepper, TextField, Typography } from '@mui/material'
-import { type } from '@testing-library/user-event/dist/type';
 import React, { useState } from 'react'
+import { DateTimePicker } from '@mui/x-date-pickers'
 
-const Input = ({ taskInput, trigger,active,dispatch }) => {
+
+const Input = ({ taskInput, trigger,active,dispatch,dateVal,handleDate }) => {
   return (
-    <Box>
+    <Box marginLeft={{xs:"0",sm:5,md:8}}>
       <Stepper orientation='vertical' activeStep={active}>
         <Step>
           <StepLabel>
@@ -42,7 +43,7 @@ const Input = ({ taskInput, trigger,active,dispatch }) => {
                 <FormControlLabel value="todo" control={<Radio />} label="Todo" />
               </RadioGroup>
             </FormControl>
-            <Button onClick={() => dispatch({ type:"forward"})}>Finish</Button>
+            <Button sx={{ marginBlock:1 }} onClick={() => dispatch({ type:"forward"})}>Finish</Button>
           </StepContent>
         </Step>
         <Step>
@@ -50,12 +51,13 @@ const Input = ({ taskInput, trigger,active,dispatch }) => {
             Pick a date
           </StepLabel>
           <StepContent>
-            <input type='date' name='date' value={taskInput.date} onChange={(e) => dispatch({ type:"change",payload:e})} />
+            {/* <input type='date' name='date' value={taskInput.date} onChange={(e) => dispatch({ type:"change",payload:e})} /> */}
+            <DateTimePicker disablePast value={taskInput.date} onChange={handleDate}/>
             <Button onClick={() => dispatch({type:'add',payload:trigger})}>Finish</Button>
           </StepContent>
         </Step>
       </Stepper>
-      <Button onClick={() => dispatch({ type:"reset" })}>Add more task</Button>
+      <Button variant='contained' sx={{ marginBlock:3 }} onClick={() => dispatch({ type:"reset" })}>Add more task</Button>
     </Box>
 
   )

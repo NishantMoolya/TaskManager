@@ -3,7 +3,6 @@ import { Box, Checkbox, IconButton, Stack, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import "./style.css"
 
-//const TaskList = ({ reducedList,deleteTask,editTask }) => {
     const TaskList = ({ reducedList,dispatch }) => {
     return (
         <Box>

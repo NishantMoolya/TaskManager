@@ -73,16 +73,7 @@ const App = () => {
     }
     return task;
   });
-  setTaskList(checked);
-    // console.log(trig[0].target.checked);
-    // console.log(checked[0].checked);
-    // checked[0].checked = trig[0].target.checked;
-    // console.log(checked[0].checked);
-    //const ind = taskList.findIndex((task,ind) => task.id === trig[1]);
-    // // //checked[0].checked ? checked[0].checked= false : checked[0].checked= true;
-    // // checked[0].checked = !checked[0].checked;
-    // setIndex(ind);
-    // taskList.splice(index, 1, checked[0]);
+    setTaskList(checked);
   }
   //task manager
   const taskManager = (triallist,action) => {

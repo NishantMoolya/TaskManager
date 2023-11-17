@@ -1,5 +1,5 @@
 import { Box, Grid } from '@mui/material'
-import React, { useReducer, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import Input from './Input'
 import Navbar from './Navbar'
 import Footer from './Footer'
@@ -16,6 +16,7 @@ const App = () => {
     task:"",
     status:"",
     date:"",
+    checked:false,
     id:Date.now()
   };
   const [taskInput, setTaskInput] = useState(initialTask);
@@ -23,8 +24,7 @@ const App = () => {
   //handle input 
   const handleInput = (e) => {
     const { name, value } = e.target;
-    setTaskInput({ ...taskInput, [name]: value })
-
+    setTaskInput({ ...taskInput, [name]: value });
   }
   //adding task 
   const addTask = (mode) => {
@@ -65,6 +65,25 @@ const App = () => {
   const handleReset = () => {
     setActive(0);
   }
+  //check the list
+  const handleChecked = (trig) => {
+    const checked = taskList.map((task) => {
+    if(task.id === trig){
+      return {...task,checked:!task.checked}
+    }
+    return task;
+  });
+  setTaskList(checked);
+    // console.log(trig[0].target.checked);
+    // console.log(checked[0].checked);
+    // checked[0].checked = trig[0].target.checked;
+    // console.log(checked[0].checked);
+    //const ind = taskList.findIndex((task,ind) => task.id === trig[1]);
+    // // //checked[0].checked ? checked[0].checked= false : checked[0].checked= true;
+    // // checked[0].checked = !checked[0].checked;
+    // setIndex(ind);
+    // taskList.splice(index, 1, checked[0]);
+  }
   //task manager
   const taskManager = (triallist,action) => {
     switch(action.type){
@@ -74,10 +93,12 @@ const App = () => {
       case 'forward' : return handleStep();
       case 'reset' : return handleReset();
       case 'change' : return handleInput(action.payload);
+      case 'check' : return handleChecked(action.payload);
       default: return ;
     }
   }
   const [triallist, dispatch] = useReducer(taskManager, []);
+
   //return jsx
   return (
     <Box minHeight={'100vh'}>

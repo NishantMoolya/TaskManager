@@ -14,16 +14,16 @@ const Navbar = () => {
                     <Grid item>
                         <Grid container spacing={2} alignItems={'center'}>
                             <Grid item>
-                                <Typography variant='body1'>Home</Typography>
+                                <Typography variant='body1'></Typography>
                             </Grid>
                             <Grid item>
-                                <Typography variant='body1'>About</Typography>
+                                <Typography variant='body1'></Typography>
                             </Grid>
                             <Grid item>
-                                <Typography variant='body1'>Services</Typography>
+                                <Typography variant='body1'></Typography>
                             </Grid>
                             <Grid item>
-                                <Typography variant='body1'>Policy</Typography>
+                                <Typography variant='body1'></Typography>
                             </Grid>
                             <Grid item>
                                 <Chip

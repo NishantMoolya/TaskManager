@@ -1,5 +1,5 @@
 import { Delete, Edit } from '@mui/icons-material'
-import { Box, Checkbox, IconButton, Stack, Typography } from '@mui/material'
+import { Box, Checkbox, Divider, IconButton, Stack, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import "./style.css"
 
@@ -19,6 +19,7 @@ import "./style.css"
                             <IconButton color='error' onClick={(e) => dispatch({ type:"delete",payload:task.id })}>
                                 <Delete />
                             </IconButton>
+                            <Divider />
                         </Stack>
                     })}
             </Stack>

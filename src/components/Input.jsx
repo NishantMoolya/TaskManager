@@ -27,7 +27,7 @@ const Input = ({ taskInput, trigger,active,dispatch }) => {
         </Step>
         <Step>
           <StepLabel>
-            Status
+            Enter status
           </StepLabel>
           <StepContent>
             <FormControl>

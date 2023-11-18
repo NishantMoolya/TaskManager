@@ -2,6 +2,7 @@ import { Delete, Edit } from '@mui/icons-material'
 import { Box, Checkbox, Divider, Grid, IconButton, Stack, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import "./style.css"
+import { NavLink } from 'react-router-dom'
 
     const TaskList = ({ reducedList,dispatch }) => {
     return (
@@ -31,9 +32,11 @@ import "./style.css"
                             <Typography variant='body1' flexGrow={1} sx={{ wordWrap:"break-word"}} className={task.checked?"line":null} >{ task.task }</Typography>
                             </Grid>
                             <Grid item xs={1}>
+                            <NavLink to='/create'>
                             <IconButton color='success' onClick={(e) => dispatch({ type:"edit",payload:task.id })}>
                                 <Edit />
                             </IconButton>
+                            </NavLink>
                             </Grid>
                             <Grid item xs={1}>
                             <IconButton color='error' onClick={(e) => dispatch({ type:"delete",payload:task.id })}>

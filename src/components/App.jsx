@@ -20,6 +20,7 @@ const App = () => {
   const [trigger, setTrigger] = useState(true);
   const [index, setIndex] = useState(null);
   const [active, setActive] = useState(0);
+  const [toggle, setToggle] = useState(false);
   let initialTask = {
     task: "",
     status: "",
@@ -87,6 +88,10 @@ const App = () => {
     });
     setTaskList(checked);
   }
+  //handle toggle
+  const handleToggle =() => {
+    setToggle((preVal) => !preVal);
+  }
   //task manager
   const taskManager = (triallist, action) => {
     switch (action.type) {
@@ -97,6 +102,7 @@ const App = () => {
       case 'reset': return handleReset();
       case 'change': return handleInput(action.payload);
       case 'check': return handleChecked(action.payload);
+      case 'toggle' : return handleToggle();
       default: return;
     }
   }
@@ -106,15 +112,15 @@ const App = () => {
   const [dateVal, setDateVal] = useState("");
   const handleDate = (value) => {
     setTaskInput({ ...taskInput, date: value });
-  }
+  }                
   //return jsx
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Box minHeight={{ xs: "none", sm: "none", md: "100vh" }}>
-        <Navbar />
-        <Grid container height={"100vh"}>
+      <Box minHeight={{ xs: "none", sm: "none", md: "90vh" }}>
+        <Navbar dispatch={dispatch} />
+        <Grid container height={"90vh"}>
           <Grid item flex={0.5} bgcolor={'primary.light'} justifyContent={"flex-start"} p={2} display={{ xs: "none", sm: "flex", md: "flex" }}>
-            <Menubar />
+            <Menubar toggle={toggle} dispatch={dispatch} />
           </Grid>
           <Grid item flex={4} bgcolor={'warn.light'} p={2}>
             <Grid container spacing={2}>
@@ -142,8 +148,8 @@ const App = () => {
             </Grid>
           </Grid>
         </Grid>
-      </Box>
       <Footer />
+      </Box>
     </LocalizationProvider>
   )
 }

@@ -9,6 +9,10 @@ import Sectionbar from './Sectionbar'
 import Menubar from './Menubar'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { Route, Routes } from 'react-router-dom'
+import HomePage from './HomePage'
+import TaskPage from './TaskPage'
+import CreatePage from './CreatePage'
 
 const App = () => {
 
@@ -40,18 +44,19 @@ const App = () => {
         taskList.splice(index, 1, taskInput);
         setTrigger(true);
       }
-      setActive((preVal) => preVal + 1);
+      //setActive((preVal) => preVal + 1);
+      setActive(0);
       setTaskInput({ ...initialTask, id: Date.now() });
     }
   }
   //deleting task
   const deleteTask = (trig) => {
     const edited = taskList.filter((task) => task.id === trig)
-    if(edited[0].checked){
-    const deleted = taskList.filter((task) => task.id !== trig);
-    setTaskList(deleted);
-    setTaskInput({ ...initialTask, id: Date.now() });
-    setTrigger(true);
+    if (edited[0].checked) {
+      const deleted = taskList.filter((task) => task.id !== trig);
+      setTaskList(deleted);
+      setTaskInput({ ...initialTask, id: Date.now() });
+      setTrigger(true);
     }
   }
   //editing task
@@ -98,38 +103,46 @@ const App = () => {
   const [triallist, dispatch] = useReducer(taskManager, []);
   const [layouttrig, setLayouttrig] = useState(true);
   const handleCreateTask = () => setLayouttrig((preVal) => !preVal);
-  const [dateVal,setDateVal] = useState("");
+  const [dateVal, setDateVal] = useState("");
   const handleDate = (value) => {
-    setTaskInput({...taskInput,date:value});
+    setTaskInput({ ...taskInput, date: value });
   }
   //return jsx
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-    <Box height={{xs:"none",sm:"none",md:"100vh"}}>
-      <Navbar />
-      <Grid container height={'100vmin'}>
-        <Grid item flex={1} bgcolor={'primary.light'} justifyContent={'center'} p={2} display={{xs:"none",sm:"none",md:"flex"}}>
-        <Menubar />
-        </Grid>
-        <Grid item flex={4} justifyContent={'center'} bgcolor={'warn.light'} p={2}>
-          <Grid container spacing={2} justifyContent={'center'}>
-            <Grid item xs={12}>
-              <Sectionbar handleCreateTask={handleCreateTask} />
+      <Box minHeight={{ xs: "none", sm: "none", md: "100vh" }}>
+        <Navbar />
+        <Grid container height={"100vh"}>
+          <Grid item flex={0.5} bgcolor={'primary.light'} justifyContent={"flex-start"} p={2} display={{ xs: "none", sm: "flex", md: "flex" }}>
+            <Menubar />
+          </Grid>
+          <Grid item flex={4} bgcolor={'warn.light'} p={2}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Sectionbar handleCreateTask={handleCreateTask} />
+              </Grid>
+              <Grid item xs={12}>
+              {/* {layouttrig ? <>
+                <Grid item xs={6}><MyAccordion element={<TaskFramer taskList={taskList} status={'reminder'} dispatch={dispatch} />} title={'Reminder'} /></Grid>
+                <Grid item xs={6}><MyAccordion element={<TaskFramer taskList={taskList} status={'todo'} dispatch={dispatch} />} title={'Todo'} /></Grid>
+              </> : <><Grid item xs={4}>
+                <Input taskInput={taskInput} trigger={trigger} active={active} dispatch={dispatch} dateVal={dateVal} handleDate={handleDate} />
+              </Grid>
+                <Grid item xs={8}>
+                  <MyAccordion element={<><MyAccordion element={<TaskFramer taskList={taskList} status={'reminder'} dispatch={dispatch} />} title={'REMINDER'} />
+                    <MyAccordion element={<TaskFramer taskList={taskList} status={'todo'} dispatch={dispatch} />} title={'TODO'} /></>} title={'Your task collections'} />
+                </Grid></>} */}
+              <Routes>
+                <Route path='/create' element={<CreatePage taskInput={taskInput} trigger={trigger} active={active} dispatch={dispatch} dateVal={dateVal} handleDate={handleDate} />} />
+                <Route path='/home' element={<HomePage />} />
+                <Route path='/tasks' element={<TaskPage taskList={taskList} status={['reminder', 'todo']} dispatch={dispatch} />} />
+                <Route />
+              </Routes>
+              </Grid>
             </Grid>
-            {layouttrig?<>
-            <Grid item xs={6}><MyAccordion element={<TaskFramer taskList={taskList} status={'reminder'} dispatch={dispatch} />} title={'Reminder'} /></Grid>
-            <Grid item xs={6}><MyAccordion element={<TaskFramer taskList={taskList} status={'todo'} dispatch={dispatch} />} title={'Todo'} /></Grid>
-            </>:<><Grid item xs={{xs:12,sm:12,md:4}}>
-              <Input taskInput={taskInput} trigger={trigger} active={active} dispatch={dispatch} dateVal={dateVal} handleDate={handleDate} />
-            </Grid>
-            <Grid item xs={{xs:12,sm:12,md:8}}>
-              <MyAccordion element={<><MyAccordion element={<TaskFramer taskList={taskList} status={'reminder'} dispatch={dispatch} />} title={'REMINDER'} />
-              <MyAccordion element={<TaskFramer taskList={taskList} status={'todo'} dispatch={dispatch} />} title={'TODO'} /></>} title={'Your task collections'} />
-            </Grid></>}
           </Grid>
         </Grid>
-      </Grid>
-    </Box>
+      </Box>
       <Footer />
     </LocalizationProvider>
   )

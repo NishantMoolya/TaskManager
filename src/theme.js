@@ -19,7 +19,7 @@ const theme = createTheme({
         MuiAccordion:{
             styleOverrides:{
                 root:{
-                    backgroundColor:"#d1c4e9",
+                    background:"linear-gradient(360deg, rgba(255,255,255,1) 0%, rgba(209,196,233,1) 100%)",
                     color:"#673ab7"
                 }
             }

@@ -5,7 +5,7 @@ import React from 'react'
 const MyAccordion = ({ element,title }) => {
     return (
         <Box m={1} >
-            <Accordion sx={{ }}>
+            <Accordion defaultExpanded>
                 <AccordionSummary expandIcon={<ExpandMore />}>
                     <Typography>
                         { title }

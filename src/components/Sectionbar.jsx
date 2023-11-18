@@ -7,7 +7,6 @@ const Sectionbar = ({handleCreateTask}) => {
     <Box display={'flex'} justifyContent={'center'}>
         <Container sx={{display:"flex", justifyContent:"center",flexDirection:"column",alignItems:"center",gap:2,m:1}}>
             <Typography display={{xs:"none", sm:"none",md:"block"}} variant='h3' color="primary.main">Taskzz : The Task Manager</Typography>
-            <Button variant='contained' startIcon={<AddTask />} onClick={handleCreateTask}>Create Task</Button>
         </Container>
     </Box>
   )

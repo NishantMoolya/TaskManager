@@ -51,13 +51,14 @@ const Input = ({ taskInput, trigger,active,dispatch,dateVal,handleDate }) => {
             Pick a date
           </StepLabel>
           <StepContent>
-            {/* <input type='date' name='date' value={taskInput.date} onChange={(e) => dispatch({ type:"change",payload:e})} /> */}
-            <DateTimePicker disablePast value={taskInput.date} onChange={handleDate}/>
-            <Button onClick={() => dispatch({type:'add',payload:trigger})}>Finish</Button>
+            <Box display={'flex'} flexDirection={'column'} gap={2} alignItems={'center'} width={{md:"300px"}}>
+            <DateTimePicker disablePast value={taskInput.date} onChange={handleDate} sx={{width:{md:"250px"}}}/>
+            <Button variant='contained' onClick={() => dispatch({type:'add',payload:trigger})} sx={{width:"200px"}}>Finish</Button>
+            </Box>
           </StepContent>
         </Step>
       </Stepper>
-      <Button variant='contained' sx={{ marginBlock:3 }} onClick={() => dispatch({ type:"reset" })}>Add more task</Button>
+      {/* <Button variant='contained' sx={{ marginBlock:3 }} onClick={() => dispatch({ type:"reset" })}>Add more task</Button> */}
     </Box>
 
   )

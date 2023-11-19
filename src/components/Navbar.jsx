@@ -14,25 +14,13 @@ const Navbar = ({ dispatch }) => {
                             </Grid>
                             <Grid item>
                                 <Typography variant='h6'>
-                                    Taskzz
+                                    Taskie
                                 </Typography>
                             </Grid>
                         </Grid>
                     </Grid>
                     <Grid item>
                         <Grid container spacing={2} alignItems={'center'}>
-                            {/* <Grid item>
-                                <Typography variant='body1'></Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant='body1'></Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant='body1'></Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant='body1'></Typography>
-                            </Grid> */}
                             <Grid item>
                                 <Grid container>
                                     <Grid item display={{xs:"none",sm:"flex"}}>

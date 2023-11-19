@@ -14,16 +14,10 @@ const Input = ({ taskInput, trigger,active,dispatch,dateVal,handleDate }) => {
             Enter Task
           </StepLabel>
           <StepContent>
-            <Stack direction={"row"} justifyContent={"center"} alignItems={"center"} spacing={2} marginBlock={2}>
+            <Stack justifyContent={"center"} alignItems={"flex-start"} spacing={2} marginBlock={2}>
               <TextField variant='filled' name='task' value={taskInput.task} label="Task" onChange={(e) => dispatch({ type:"change",payload:e})} fullWidth />
-              {/* {trigger ? <IconButton color='primary' size='small' onClick={addTask} >
-                <Add />
-              </IconButton> :
-                <IconButton color='secondary' onClick={editTaskOriginal}>
-                  <Edit />
-                </IconButton>} */}
+              {trigger? <Button onClick={() => dispatch({ type:"direct",payload:"forward"})} variant='outlined' startIcon={<Add />}>Add</Button>:<Button onClick={() => dispatch({ type:"direct",payload:"forward"})} variant='outlined' startIcon={<Edit />}>Edit</Button>}
             </Stack>
-            {trigger? <Button onClick={() => dispatch({ type:"forward"})} startIcon={<Add />}>Add</Button>:<Button onClick={() => dispatch({ type:"forward"})} startIcon={<Edit />}>Edit</Button>}
           </StepContent>
         </Step>
         <Step>
@@ -43,7 +37,8 @@ const Input = ({ taskInput, trigger,active,dispatch,dateVal,handleDate }) => {
                 <FormControlLabel value="todo" control={<Radio />} label="Todo" />
               </RadioGroup>
             </FormControl>
-            <Button sx={{ marginBlock:1 }} onClick={() => dispatch({ type:"forward"})}>Finish</Button>
+            <Button sx={{ marginBlock:1 }} onClick={() => dispatch({ type:"direct",payload:"forward"})} variant='outlined'>Next</Button>
+            <Button onClick={() => dispatch({ type:"direct",payload:"back"})}>Back</Button>
           </StepContent>
         </Step>
         <Step>
@@ -53,7 +48,10 @@ const Input = ({ taskInput, trigger,active,dispatch,dateVal,handleDate }) => {
           <StepContent>
             <Box display={'flex'} flexDirection={'column'} gap={2} alignItems={'center'} width={{md:"300px"}}>
             <DateTimePicker disablePast value={taskInput.date} onChange={handleDate} sx={{width:{md:"250px"}}}/>
-            <Button variant='contained' onClick={() => dispatch({type:'add',payload:trigger})} sx={{width:"200px"}}>Finish</Button>
+            <Stack direction={'row'}>
+            <Button variant='contained' onClick={() => dispatch({type:'add',payload:trigger})}>Finish</Button>
+            <Button onClick={() => dispatch({ type:"direct",payload:"back"})}>Back</Button>
+            </Stack>
             </Box>
           </StepContent>
         </Step>

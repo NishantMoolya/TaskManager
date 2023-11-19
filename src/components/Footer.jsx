@@ -8,7 +8,7 @@ const Footer = () => {
             <Grid container>
                 <Grid item>
                     <Typography variant='subtitle1'>
-                        This is footer
+                        Created by Nishant Moolya
                     </Typography>
                 </Grid>
             </Grid>

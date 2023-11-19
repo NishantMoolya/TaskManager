@@ -10,10 +10,6 @@ const CreatePage = ({ taskInput,trigger,active,dispatch,dateVal,handleDate,}) =>
                 <Input taskInput={taskInput} trigger={trigger} active={active} dispatch={dispatch} dateVal={dateVal} handleDate={handleDate} />
                 </Grid>
             </Grid>
-            {/* <Grid item xs={8}>
-                <MyAccordion element={<><MyAccordion element={<TaskFramer taskList={taskList} status={'reminder'} dispatch={dispatch} />} title={'REMINDER'} />
-                <MyAccordion element={<TaskFramer taskList={taskList} status={'todo'} dispatch={dispatch} />} title={'TODO'} /></>} title={'Your task collections'} />
-            </Grid> */}
         </Box>
     )
 }

@@ -1,10 +1,11 @@
 import { Logout, MenuOutlined } from '@mui/icons-material'
 import { AppBar, Avatar, Box, Chip, Grid, IconButton, Stack, Toolbar, Typography } from '@mui/material'
 import React from 'react'
+import { motion } from 'framer-motion'
 
 const Navbar = ({ dispatch }) => {
     return (
-        <AppBar position='sticky'>
+        <AppBar position='sticky' component={motion.div} initial={{y:"-100vh"}} animate={{y:0}} transition={{duration:0.5,type:'spring'}}>
             <Toolbar>
                 <Grid container alignItems={'center'}>
                     <Grid item flex={1}>

@@ -8,7 +8,7 @@ const Menubar = ({ toggle, dispatch }) => {
     const drawer = (
         <List>
             <ListItem divider>
-                <NavLink to='/home' className='route'>
+                <NavLink to='/' className='route'>
                     <ListItemButton>
                         <ListItemIcon>
                             <Home />

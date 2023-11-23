@@ -47,7 +47,7 @@ const Input = ({ taskInput, trigger,active,dispatch,dateVal,handleDate }) => {
           </StepLabel>
           <StepContent>
             <Box display={'flex'} flexDirection={'column'} gap={2} alignItems={'center'} width={{md:"300px"}}>
-            <DateTimePicker disablePast value={taskInput.date} onChange={handleDate} sx={{width:{md:"250px"}}}/>
+            <DateTimePicker disablePast value={taskInput.date} onChange={(e) => handleDate(e.value)} sx={{width:{md:"250px"}}}/>
             <Stack direction={'row'}>
             <Button variant='contained' onClick={() => dispatch({type:'add',payload:trigger})}>Finish</Button>
             <Button onClick={() => dispatch({ type:"direct",payload:"back"})}>Back</Button>

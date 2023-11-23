@@ -3,6 +3,7 @@ import { Box, Checkbox, Grid, IconButton, ListItemText, Menu, MenuItem, SpeedDia
 import React, { useState } from 'react'
 import "./style.css"
 import { NavLink } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const TaskList = ({ reducedList, dispatch }) => {
     const [anchor, setAnchor] = useState(null);
@@ -15,7 +16,7 @@ const TaskList = ({ reducedList, dispatch }) => {
                 {
                     reducedList.map((task) => {
                         const { date } = task;
-                        return <Grid container direction={'column'} justifyContent={'center'} key={task._id}>
+                        return <Grid container direction={'column'} justifyContent={'center'} key={task._id} component={motion.div}>
                             <Grid item xs={12}>
                                 <Grid container direction={'row'} alignItems={'center'}>
                                     <Grid item xs={1} marginRight={1}>
@@ -76,7 +77,7 @@ const TaskList = ({ reducedList, dispatch }) => {
                             <Grid item xs={1} alignSelf={'flex-end'}>
                                 <Grid container marginRight={3}>
                                     <Grid item>
-                                        <Typography variant='overline'>{`${date.$D}/${date.$M + 1}/${date.$y}`}</Typography>
+                                        <Typography variant='overline'>{`${date}`}</Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>

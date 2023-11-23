@@ -2,22 +2,23 @@ import { AddTask } from '@mui/icons-material'
 import { Box, Button, Card, CardActions, CardContent, CardHeader, Grid, Paper, Typography } from '@mui/material'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const HomePage = () => {
   return (
-    <Box>
+    <Box component={motion.div} exit={{x:"100vw",transition:{duration:0.5,ease:'easeOut'}}}>
       <Grid container flexDirection={'column'} spacing={4} alignItems={'center'}>
         <Grid item xs={12}>
-        <Typography display={{xs:"none", sm:"none",md:"block"}} variant='h3' color="primary.main">Taskie : The Task Manager</Typography>
+        <Typography display={{xs:"none", sm:"none",md:"block"}} variant='h3' color="primary.main" component={motion.h1} initial={{opacity:0}} animate={{opacity:1}} transition={{duration:2}}>Taskie : The Task Manager</Typography>
         </Grid>
         <Grid item xs={12}>
-          <NavLink to='/create'><Button variant='contained' startIcon={<AddTask />}>Create Task</Button></NavLink>
+          <NavLink to='/create'><Button variant='contained' startIcon={<AddTask />} component={motion.button} whileHover={{ scale:1.2}}>Create Task</Button></NavLink>
           <Typography variant='body1'></Typography>
         </Grid>
         <Grid item xs={12}>
           <Grid container spacing={4} justifyContent={'center'}> 
             <Grid item>
-              <Card sx={{maxWidth:"330px"}}>
+              <Card sx={{maxWidth:"330px"}} component={motion.div} initial={{x:"-100vw"}} animate={{x:0}} transition={{duration:0.5,delay:1,type:'spring'}}>
                 <CardHeader title="Reminders" subheader="Streamline your day with personalized reminders">
                 </CardHeader>
                 <CardContent>
@@ -29,7 +30,7 @@ const HomePage = () => {
               </Card>
             </Grid>
             <Grid item>
-              <Card sx={{maxWidth:"330px"}}>
+              <Card sx={{maxWidth:"330px"}} component={motion.div} initial={{x:"100vw"}} animate={{x:0}} transition={{duration:0.5,delay:1,type:'spring'}}>
                 <CardHeader title="Todo" subheader="Effortlessly manage tasks and complete it"></CardHeader>
                 <CardContent>
                   <Typography variant='body2'>A list or collection of tasks or activities that you need or want to accomplish.To-dos can range from simple everyday activities like grocery shopping or responding to emails to more complex tasks such as completing a project at work or studying for an exam.</Typography>

@@ -26,7 +26,7 @@ const App = () => {
   let initialTask = {
     task: "",
     status: "",
-    date: {},
+    //date: {},
     checked: false,
     _id: Date.now()
   };

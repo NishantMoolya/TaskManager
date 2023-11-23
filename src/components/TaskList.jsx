@@ -76,10 +76,10 @@ const TaskList = ({ reducedList, dispatch }) => {
                             </Grid>
                             <Grid item xs={1} alignSelf={'flex-end'}>
                                 <Grid container marginRight={3}>
-                                    <Grid item>
+                                    {/* <Grid item>
                                         <Typography variant='overline'>{`${date}`}</Typography>
-                                    </Grid>
-                                </Grid>
+                                    </Grid>*/}
+                                </Grid> 
                             </Grid>
                         </Grid>
                     })}

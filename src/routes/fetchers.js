@@ -30,12 +30,12 @@ const delTask = async (_id) => {
 
 }
 
-const fetchEdit = async (taskList) => {
+const fetchEdit = async (tasklist) => {
   try {
     const response = await fetch('http://localhost:8000/user/task', {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(taskList)
+      body: JSON.stringify(tasklist)
     })
   } catch (err) {
     console.log(`An error occured in editing task:${err}`);
